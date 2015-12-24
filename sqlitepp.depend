@@ -1,0 +1,88 @@
+# depslib dependency file v1.0
+1450915520 source:c:\users\custom\projects\sqlitepp\sqlite3\sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1450926014 source:c:\users\custom\projects\sqlitepp\main.cpp
+	"SQLite.h"
+	<iostream>
+	<unistd.h>
+	<time.h>
+	<sstream>
+	<string.h>
+
+1450915520 c:\users\custom\projects\sqlitepp\sqlite3\sqlite3.h
+	<stdarg.h>
+
+1450925544 source:c:\users\custom\projects\sqlitepp\sqlite.cpp
+	"SQLite.h"
+	<stdarg.h>
+
+1450923534 c:\users\custom\projects\sqlitepp\sqlite.h
+	<vector>
+	<string>
+	<stdint.h>
+	<stdio.h>
+	"sqlite3/sqlite3.h"
+	<stdlib.h>
+	<string.h>
+
+1450923141 source:c:\users\custom\projects\sqlitepp\sqliterow.cpp
+	"SQLite.h"
+
+1450923362 source:c:\users\custom\projects\sqlitepp\sqlitecolumn.cpp
+	"SQLite.h"
+
