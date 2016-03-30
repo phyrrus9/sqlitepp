@@ -83,7 +83,7 @@ bool SQLite::query(std::string i_query)
             {
                 SQLiteColumn *tmp_col = new SQLiteColumn;
                 tmp_col->length = sqlite3_column_bytes(stmt, tmp_i);
-                tmp_col->data = (unsigned char *)strdup((char *)sqlite3_column_text(stmt, tmp_i));
+			  tmp_col->data = (unsigned char *)(tmp_col->length == 0 ? NULL : strdup((char *)sqlite3_column_text(stmt, tmp_i)));
                 tmp_row->cols->push_back(tmp_col);
             }
             ret->rows->push_back(tmp_row);
