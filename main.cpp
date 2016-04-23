@@ -12,9 +12,9 @@ int main()
 {
     srand(time(NULL));
     MySQL q;
-    if (q.open("192.243.109.171", "admin", "9unkz0r")) //if database exists, open it
+    if (q.open("localhost", "admin", "9unkz0r", "test")) //if database exists, open it
     {
-	q.statement("use test;");
+	//q.statement("use test;");
         if (q.query("SELECT COUNT(*) FROM tmp;")) //check row count
             if (q[0][0].integer() > 10)
                 q.statement("DELETE FROM tmp where 1=1;"); //truncate if more than 10 rows

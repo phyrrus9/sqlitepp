@@ -117,8 +117,12 @@ bool MySQL::query(std::string i_query)
                 for (unsigned int i = 0; i < this->result->nCols; i++)
                 {
                     s_col = new SQLiteColumn;
-                    s_col->data = (unsigned char *)malloc(strlen(row[i]) + 1);
-                    strcpy((char *)s_col->data, row[i]);
+                    s_col->data = NULL;
+                    if (row[i] != NULL)
+                    {
+                        s_col->data = (unsigned char *)malloc(strlen(row[i]) + 1);
+                        strcpy((char *)s_col->data, row[i]);
+                    }
                     s_row->cols->push_back(s_col);
                 }
                 this->result->rows->push_back(s_row);

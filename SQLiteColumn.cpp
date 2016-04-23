@@ -8,7 +8,7 @@ SQLiteColumn::SQLiteColumn()
 
 SQLiteColumn::~SQLiteColumn()
 {
-    free(this->data);
+    //free(this->data);
 }
 
 bool SQLiteColumn::isNull()
