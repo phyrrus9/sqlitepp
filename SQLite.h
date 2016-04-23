@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "sqlite3/sqlite3.h"
+#include <mysql/mysql.h>
 #include <stdlib.h>
 #include <string.h>
 #ifndef SQLITE_H_INCLUDED
@@ -64,6 +65,28 @@ public:
     bool open_create(std::string i_dbPath, int ip_flags = SQLITE_OPEN_READWRITE);
     void close();
     bool error();
+    SQLiteRow operator[](int i_index);
+    int count() { return result->nRows; }
+    SQLiteResult *getResult() { return result; }
+};
+
+class MySQL
+{
+    MYSQL * db;
+    char * host;
+    char * user;
+    char * pass;
+    unsigned short port;
+    SQLiteResult *result;
+public:
+    MySQL();
+    ~MySQL();
+    bool query(std::string i_query);
+    bool query(const char *i_fmt, ...);
+    bool statement(std::string i_query);
+    bool statement(const char *i_fmt, ...);
+    bool open(char *i_host, char *i_user, char *i_pass, unsigned int i_port = 0);
+    void close();
     SQLiteRow operator[](int i_index);
     int count() { return result->nRows; }
     SQLiteResult *getResult() { return result; }
