@@ -11,9 +11,10 @@ using std::endl;
 int main()
 {
     srand(time(NULL));
-    SQLite q;
-    if (q.open("test.db3")) //if database exists, open it
+    MySQL q;
+    if (q.open("192.243.109.171", "admin", "9unkz0r")) //if database exists, open it
     {
+	q.statement("use test;");
         if (q.query("SELECT COUNT(*) FROM tmp;")) //check row count
             if (q[0][0].integer() > 10)
                 q.statement("DELETE FROM tmp where 1=1;"); //truncate if more than 10 rows
@@ -27,10 +28,12 @@ int main()
                 cout << q[i]["a"].integer() << "\t" << q[i]["b"].integer() << endl; //print each row
         }
     }
-    else //if it does not exist, create it
-    {
-        q.open_create("test.db3");
-        cout << q.statement("CREATE TABLE tmp(a int, b int);"); //create our table
-    }
+    else
+        printf("DB Open Failed!\n");
+//    else //if it does not exist, create it
+//    {
+//        q.open_create("test.db3");
+//        cout << q.statement("CREATE TABLE tmp(a int, b int);"); //create our table
+//    }
     q.close();
 }

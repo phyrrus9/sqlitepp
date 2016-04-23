@@ -22,7 +22,7 @@ MySQL::~MySQL()
     condfree(this->pass);
 }
 
-bool MySQL::open(char *i_host, char *i_user, char *i_pass, unsigned int i_port)
+bool MySQL::open(char *i_host, char *i_user, char *i_pass, char *i_db, unsigned int i_port)
 {
     if (this->db != NULL)
         return false; //no duplicate connections
@@ -36,7 +36,8 @@ bool MySQL::open(char *i_host, char *i_user, char *i_pass, unsigned int i_port)
     strcpy(this->host, i_host);
     strcpy(this->user, i_user);
     strcpy(this->pass, i_pass);
-	if ((this->db = mysql_real_connect(NULL, this->host, this->user, this->pass, NULL, this->port) == NULL))
+    this->db = mysql_init(NULL);
+    if (mysql_real_connect(this->db, this->host, this->user, this->pass, i_db, this->port, NULL, 0) == NULL)
     {
         mysql_close(this->db);
         this->db = NULL;
@@ -86,11 +87,11 @@ SQLiteRow MySQL::operator[](int i_index)
 
 bool MySQL::query(std::string i_query)
 {
-    const char query = i_query.c_str();
+    const char *query = i_query.c_str();
     bool rval = false;
     MYSQL_RES *result;
     MYSQL_FIELD *fields;
-    MYSQL_ROW *row;
+    MYSQL_ROW row;
     SQLiteRow *s_row;
     SQLiteColumn *s_col;
     if (mysql_query(this->db, query) == 0)
@@ -108,7 +109,7 @@ bool MySQL::query(std::string i_query)
             for (unsigned int i = 0; i < this->result->nCols; i++)
                 this->result->colNames->push_back(std::string(fields[i].name));
             //parse rows
-            while ((row = mysql_fetch_row(result)) != (MYSQL_ROW *)NULL)
+            while ((row = mysql_fetch_row(result)) != (MYSQL_ROW)NULL)
             {
                 this->result->nRows++;
                 s_row = new SQLiteRow();
@@ -116,7 +117,8 @@ bool MySQL::query(std::string i_query)
                 for (unsigned int i = 0; i < this->result->nCols; i++)
                 {
                     s_col = new SQLiteColumn;
-                    s_col->data = row[i];
+                    s_col->data = (unsigned char *)malloc(strlen(row[i]) + 1);
+                    strcpy((char *)s_col->data, row[i]);
                     s_row->cols->push_back(s_col);
                 }
                 this->result->rows->push_back(s_row);
@@ -129,7 +131,7 @@ bool MySQL::query(std::string i_query)
 
 bool MySQL::statement(std::string i_query)
 {
-    const char query = i_query.c_str();
+    const char *query = i_query.c_str();
     mysql_query(this->db, query) == 0 ? true : false;
 }
 

@@ -85,7 +85,7 @@ public:
     bool query(const char *i_fmt, ...);
     bool statement(std::string i_query);
     bool statement(const char *i_fmt, ...);
-    bool open(char *i_host, char *i_user, char *i_pass, unsigned int i_port = 0);
+    bool open(char *i_host, char *i_user, char *i_pass, char *i_db = NULL, unsigned int i_port = 0);
     void close();
     SQLiteRow operator[](int i_index);
     int count() { return result->nRows; }
