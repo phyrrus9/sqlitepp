@@ -3,7 +3,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "sqlite3/sqlite3.h"
+#ifndef _SQLITEPP_SQLITE_ONLY
+#define _SQLITEPP_INCLUDE_MYSQL
 #include <mysql/mysql.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #ifndef SQLITE_H_INCLUDED
@@ -70,6 +73,8 @@ public:
     SQLiteResult *getResult() { return result; }
 };
 
+#ifdef _SQLITEPP_INCLUDE_MYSQL
+
 class MySQL
 {
     MYSQL * db;
@@ -91,5 +96,7 @@ public:
     int count() { return result->nRows; }
     SQLiteResult *getResult() { return result; }
 };
+
+#endif
 
 #endif // SQLITE_H_INCLUDED

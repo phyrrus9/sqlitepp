@@ -107,7 +107,7 @@ bool SQLite::query(const char *i_fmt, ...)
     vsprintf(str, i_fmt, args);
     va_end(args);
     ret = SQLite::query(std::string(str));
-    delete str;
+    delete[] str;
     return ret;
 }
 
@@ -126,7 +126,7 @@ bool SQLite::statement(const char *i_fmt, ...)
     vsprintf(str, i_fmt, args);
     va_end(args);
     ret = SQLite::statement(std::string(str));
-    delete str;
+    delete[] str;
     return ret;
 }
 
